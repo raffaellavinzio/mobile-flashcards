@@ -10,7 +10,7 @@ import baseStyles from "../styles";
 
 const Stack = createStackNavigator();
 
-function CardNavigation() {
+function CardNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -42,4 +42,4 @@ function CardNavigation() {
   );
 }
 
-export default CardNavigation;
+export default CardNavigator;

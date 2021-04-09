@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 
 import Button from "../components/AppButton";
 
 import baseStyles from "../styles";
-import initialDataObj from "../data";
 
-function QuizScreen({ navigation }) {
-  const cards = initialDataObj["React"].questions;
-  const numCards = cards.length;
-  let cardsLeft = cards.slice(0);
-
+function QuizScreen({ navigation, route }) {
   const randomPickNextCard = () => {
     const randomIndex = Math.floor(Math.random() * cardsLeft.length);
     const nextCard = cardsLeft[randomIndex];
@@ -18,6 +14,10 @@ function QuizScreen({ navigation }) {
     return nextCard;
   };
 
+  const cards =
+    useSelector(state => state.decks[route.params.name].questions) || [];
+  const numCards = cards.length;
+  let cardsLeft = cards.slice(0);
   [card, setCard] = useState(randomPickNextCard());
   [numCorrect, setNumCorrect] = useState(0);
   [numLeft, setNumLeft] = useState(numCards);
@@ -27,7 +27,7 @@ function QuizScreen({ navigation }) {
   const handleCardComplete = score => {
     setNumCorrect(numCorrect + score);
     setNumLeft(numLeft - 1);
-    if (numLeft === 1) setQuizComplete(s => !s);
+    if (numLeft === 1) setQuizComplete(true);
     setCard(randomPickNextCard());
     setToggleCard(false);
   };
@@ -36,7 +36,8 @@ function QuizScreen({ navigation }) {
     cardsLeft = cards.slice(0);
     setNumLeft(numCards);
     setNumCorrect(0);
-    setQuizComplete(s => !s);
+    setQuizComplete(false);
+    setCard(randomPickNextCard());
   };
 
   if (quizComplete)

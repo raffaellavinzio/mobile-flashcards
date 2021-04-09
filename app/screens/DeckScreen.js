@@ -1,19 +1,37 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { removeDeck } from "../store/decksSlice";
 
 import Button from "../components/AppButton";
 
 import baseStyles from "../styles";
-import initialDataObj from "../data";
 
-function DeckScreen({ navigation }) {
-  const deck = initialDataObj["React"];
-  const numCards = initialDataObj["React"].questions.length;
+function DeckScreen({ navigation, route }) {
+  const dispatch = useDispatch();
+  const { title, questions } =
+    useSelector(state => state.decks[route.params.name]) || {};
+
+  if (!title) return null;
+  const numCards = questions.length;
+
+  const handleRemoveDeck = () => {
+    dispatch(removeDeck(title));
+    navigation.goBack();
+  };
 
   if (numCards === 0) {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Sorry, there are no cards in this deck!</Text>
+        <Button
+          style={{ backgroundColor: baseStyles.colors.pink }}
+          onPress={() => navigation.navigate("AddCard", { name: `${title}` })}
+          title='Add Card'
+        />
+        <Text style={styles.btnLink} onPress={handleRemoveDeck}>
+          Delete Deck
+        </Text>
       </View>
     );
   }
@@ -21,7 +39,7 @@ function DeckScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.deckInfo}>
-        <Text style={styles.title}>{deck.title}</Text>
+        <Text style={styles.title}>{title}</Text>
         {numCards === 1 ? (
           <Text style={styles.text}>{numCards} card</Text>
         ) : (
@@ -31,15 +49,15 @@ function DeckScreen({ navigation }) {
       <View style={styles.btnsWrapper}>
         <Button
           style={{ backgroundColor: baseStyles.colors.pink }}
-          onPress={() => navigation.navigate("AddCard")}
+          onPress={() => navigation.navigate("AddCard", { name: `${title}` })}
           title='Add Card'
         />
         <Button
           style={{ backgroundColor: baseStyles.colors.darkGreen }}
-          onPress={() => navigation.navigate("Quiz")}
+          onPress={() => navigation.navigate("Quiz", { name: `${title}` })}
           title='Start Quiz'
         />
-        <Text style={styles.btnLink} onPress={() => console.log("delete")}>
+        <Text style={styles.btnLink} onPress={handleRemoveDeck}>
           Delete Deck
         </Text>
       </View>

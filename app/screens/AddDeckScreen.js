@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text } from "react-native";
+import { useDispatch } from "react-redux";
+import { addDeckTitle } from "../store/decksSlice";
 
 import Button from "../components/AppButton";
 import FormScreenWrapper from "../components/FormScreenWrapper";
@@ -7,13 +9,18 @@ import TextInput from "../components/AppTextInput";
 
 import baseStyles from "../styles";
 
-function AddDeckScreen() {
+function AddDeckScreen({ navigation }) {
   const [error, setError] = useState("");
   const [title, setTitle] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
     setError("");
     if (!title) return setError("A title is required");
+
+    dispatch(addDeckTitle(title));
+    navigation.navigate("Deck", { name: title });
   };
 
   return (

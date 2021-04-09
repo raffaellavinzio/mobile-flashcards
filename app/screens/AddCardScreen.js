@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCardToDeck } from "../store/decksSlice";
 
 import Button from "../components/AppButton";
 import FormScreenWrapper from "../components/FormScreenWrapper";
@@ -6,19 +8,26 @@ import TextInput from "../components/AppTextInput";
 
 import baseStyles from "../styles";
 
-function AddCardScreen({ navigation }) {
+function AddCardScreen({ navigation, route }) {
   const [questionError, setQuestionError] = useState("");
   const [answerError, setAnswerError] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
     setQuestionError("");
     setAnswerError("");
     if (!question) setQuestionError("A question is required");
     if (!answer) setAnswerError("An answer is required");
-    if (questionError || answerError) return;
-    navigation.navigate.goBack();
+
+    if (question && answer) {
+      dispatch(
+        addCardToDeck({ title: route.params.name, card: { question, answer } })
+      );
+      navigation.goBack();
+    }
   };
 
   return (
