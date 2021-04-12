@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { removeDeck } from "../store/decksSlice";
 
 import Button from "../components/AppButton";
 
 import baseStyles from "../styles";
+import { removeDeck } from "../store/decksSlice";
 
 function DeckScreen({ navigation, route }) {
   const dispatch = useDispatch();
@@ -68,7 +68,6 @@ function DeckScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   btnLink: {
     color: baseStyles.colors.dark,
-    fontFamily: baseStyles.fonts.fontFamily,
     fontStyle: "italic",
     marginTop: 30,
     textDecorationColor: baseStyles.colors.dark,
@@ -91,14 +90,13 @@ const styles = StyleSheet.create({
   },
   text: {
     color: baseStyles.colors.dark,
-    fontFamily: baseStyles.fonts.fontFamily,
     fontSize: 20,
     marginVertical: 5,
     padding: 10,
+    textAlign: "center",
   },
   title: {
     color: baseStyles.colors.dark,
-    fontFamily: baseStyles.fonts.fontFamily,
     fontSize: 50,
     textTransform: "uppercase",
     textAlign: "center",

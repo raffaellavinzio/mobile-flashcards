@@ -2,7 +2,7 @@ import {
   combineReducers,
   configureStore,
   getDefaultMiddleware,
-} from '@reduxjs/toolkit'
+} from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -12,21 +12,20 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+} from "redux-persist";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import decksReducer from "./decksSlice";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: AsyncStorage,
-}
+};
 
 const rootReducer = combineReducers({
-  decks: decksReducer
-})
+  decks: decksReducer,
+});
 
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -37,6 +36,6 @@ const store = configureStore({
   }),
 });
 
-const persistor = persistStore(store)
+const persistor = persistStore(store);
 
-export { store, persistor }
+export { store, persistor };

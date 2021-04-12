@@ -5,7 +5,7 @@ import baseStyles from "../styles";
 
 function Card({ item, onPress }) {
   const numCards = item.questions.length;
-  
+
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
@@ -31,12 +31,10 @@ const styles = StyleSheet.create({
   },
   text: {
     color: baseStyles.colors.dark,
-    fontFamily: baseStyles.fontFamily,
     marginVertical: 5,
   },
   title: {
     color: baseStyles.colors.dark,
-    fontFamily: baseStyles.fontFamily,
     fontSize: 20,
     fontWeight: "bold",
     textTransform: "uppercase",

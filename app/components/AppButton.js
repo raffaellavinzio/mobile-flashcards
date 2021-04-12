@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: baseStyles.colors.dark,
-    fontFamily: baseStyles.fontFamily,
     fontSize: 16,
     paddingHorizontal: 20,
     paddingVertical: 15,

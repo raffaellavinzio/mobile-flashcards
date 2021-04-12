@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Button from "../components/AppButton";
 
 import baseStyles from "../styles";
+import { rescheduleDailyNotifications } from "../notifications";
 
 function QuizScreen({ navigation, route }) {
   const randomPickNextCard = () => {
@@ -23,6 +24,7 @@ function QuizScreen({ navigation, route }) {
   [numLeft, setNumLeft] = useState(numCards);
   [toggleCard, setToggleCard] = useState(false);
   [quizComplete, setQuizComplete] = useState(false);
+  [quizCount, setQuizCount] = useState(1);
 
   const handleCardComplete = score => {
     setNumCorrect(numCorrect + score);
@@ -38,6 +40,8 @@ function QuizScreen({ navigation, route }) {
     setNumCorrect(0);
     setQuizComplete(false);
     setCard(randomPickNextCard());
+    setQuizCount(quizCount + 1);
+    if (quizCount === 1) rescheduleDailyNotifications();
   };
 
   if (quizComplete)
@@ -101,7 +105,6 @@ function QuizScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   btnLink: {
     color: baseStyles.colors.dark,
-    fontFamily: baseStyles.fonts.fontFamily,
     fontStyle: "italic",
     marginTop: 30,
     textDecorationColor: baseStyles.colors.dark,
@@ -121,7 +124,6 @@ const styles = StyleSheet.create({
     paddingTop: baseStyles.screenPaddingTop,
   },
   text: {
-    fontFamily: baseStyles.fonts.fontFamily,
     fontSize: 30,
     textAlign: "center",
     width: "80%",

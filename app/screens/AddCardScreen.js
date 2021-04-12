@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addCardToDeck } from "../store/decksSlice";
 
 import Button from "../components/AppButton";
 import FormScreenWrapper from "../components/FormScreenWrapper";
 import TextInput from "../components/AppTextInput";
 
+import { addCardToDeck } from "../store/decksSlice";
 import baseStyles from "../styles";
 
 function AddCardScreen({ navigation, route }) {

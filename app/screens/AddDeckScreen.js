@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, Text } from "react-native";
 import { useDispatch } from "react-redux";
-import { addDeckTitle } from "../store/decksSlice";
 
 import Button from "../components/AppButton";
 import FormScreenWrapper from "../components/FormScreenWrapper";
 import TextInput from "../components/AppTextInput";
 
+import { addDeckTitle } from "../store/decksSlice";
 import baseStyles from "../styles";
 
 function AddDeckScreen({ navigation }) {
@@ -39,10 +39,10 @@ function AddDeckScreen({ navigation }) {
 const styles = StyleSheet.create({
   title: {
     color: baseStyles.colors.dark,
-    fontFamily: baseStyles.fonts.fontFamily,
-    fontSize: 50,
+    fontSize: 40,
     textAlign: "center",
     textTransform: "uppercase",
+    width: "90%",
   },
 });
 
