@@ -24,7 +24,6 @@ function QuizScreen({ navigation, route }) {
   [numLeft, setNumLeft] = useState(numCards);
   [toggleCard, setToggleCard] = useState(false);
   [quizComplete, setQuizComplete] = useState(false);
-  [quizCount, setQuizCount] = useState(1);
 
   const handleCardComplete = score => {
     setNumCorrect(numCorrect + score);
@@ -40,8 +39,7 @@ function QuizScreen({ navigation, route }) {
     setNumCorrect(0);
     setQuizComplete(false);
     setCard(randomPickNextCard());
-    setQuizCount(quizCount + 1);
-    if (quizCount === 1) rescheduleDailyNotifications();
+    rescheduleDailyNotifications();
   };
 
   if (quizComplete)

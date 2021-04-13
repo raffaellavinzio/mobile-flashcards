@@ -12,7 +12,7 @@ function DecksScreen({ navigation }) {
   const renderItem = ({ item }) => (
     <Card
       item={item}
-      onPress={() => navigation.navigate("Deck", { name: `${item.title}` })}
+      onPress={() => navigation.navigate("Deck", { name: item.title })}
     />
   );
 

@@ -26,7 +26,7 @@ function DeckScreen({ navigation, route }) {
         <Text style={styles.text}>Sorry, there are no cards in this deck!</Text>
         <Button
           style={{ backgroundColor: baseStyles.colors.pink }}
-          onPress={() => navigation.navigate("AddCard", { name: `${title}` })}
+          onPress={() => navigation.navigate("AddCard", { name: title })}
           title='Add Card'
         />
         <Text style={styles.btnLink} onPress={handleRemoveDeck}>
@@ -49,12 +49,12 @@ function DeckScreen({ navigation, route }) {
       <View style={styles.btnsWrapper}>
         <Button
           style={{ backgroundColor: baseStyles.colors.pink }}
-          onPress={() => navigation.navigate("AddCard", { name: `${title}` })}
+          onPress={() => navigation.navigate("AddCard", { name: title })}
           title='Add Card'
         />
         <Button
           style={{ backgroundColor: baseStyles.colors.darkGreen }}
-          onPress={() => navigation.navigate("Quiz", { name: `${title}` })}
+          onPress={() => navigation.navigate("Quiz", { name: title })}
           title='Start Quiz'
         />
         <Text style={styles.btnLink} onPress={handleRemoveDeck}>
